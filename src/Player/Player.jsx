@@ -3,7 +3,7 @@ import "./Player.css";
 import batmanStand1 from "../images/sprites/batman/stand/batman-stand1.gif";
 
 function Player() {
-  let hCounter = 5;
+  let hCounter = 4;
   let vCounter = 10;
   let jumpPressed = false;
 
@@ -12,17 +12,34 @@ function Player() {
     // console.log(event.keyCode);
     let player = document.getElementsByClassName("player-sprite");
     // moving to the right
-    if (event.keyCode === 68 && hCounter < 80) {
-      hCounter += 2;
-      let hMove = hCounter + "%";
-      player.item(0).style.left = hMove;
+    if (event.keyCode === 68 && hCounter < 84) {
+      let currentRun = 0;
+      const rightInterval = setInterval(function () {
+        if (currentRun === 2 || hCounter > 84) {
+          clearInterval(rightInterval);
+        } else {
+          hCounter += 0.25;
+          currentRun += 0.25;
+          let hMove = hCounter + "%";
+          player.item(0).style.left = hMove;
+        }
+      }, 10);
     }
     // moving to the left
     if (event.keyCode === 65 && hCounter > 4) {
-      hCounter -= 2;
-      let hMove = hCounter + "%";
-      player.item(0).style.left = hMove;
+      let currentRun = 0;
+      const leftInterval = setInterval(function () {
+        if (currentRun === -2 || hCounter < 4) {
+          clearInterval(leftInterval);
+        } else {
+          hCounter -= 0.25;
+          currentRun -= 0.25;
+          let hMove = hCounter + "%";
+          player.item(0).style.left = hMove;
+        }
+      }, 10);
     }
+
     // jumping pressed
     if (event.keyCode === 87 && !jumpPressed) {
       jumpPressed = true;
