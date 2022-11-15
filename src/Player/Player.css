@@ -1,12 +1,12 @@
-/* .player-container {
+.player-sprite-container {
     min-width: 100%;
     min-height: 100%;
-} */
+}
 
 .player-sprite {
-    max-width: 12rem;
-    height: 12rem;
+    width: 8rem;
+    height: 8rem;
     position:absolute;
-    bottom: 10%;
-    left: 4%;
+    bottom: 20%;
+    left: 6%;
 }
