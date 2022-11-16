@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import "./Player.css";
 import batman_stand from "../images/sprites/batman/batman-stand.gif";
+import batman_running from "../images/sprites/batman/batman-running.gif";
+import batman_running_reverse from "../images/sprites/batman/batman-running-reverse.gif";
+import batman_stand_reverse from "../images/sprites/batman/batman-stand-reverse.gif";
 
 export default function Player() {
   let hCounter = useRef(4);
@@ -17,9 +20,21 @@ export default function Player() {
       if (event.keyCode === 68 && hCounter.current < 86) {
         let player = document.getElementsByClassName("player-sprite");
         let currentRun = 0;
+        // temporary
+        if (
+          player.item(0).src !==
+          "http://localhost:3000/static/media/batman-running.ebc0a728fae5bf2bb4a4.gif"
+        ) {
+          player.item(0).src = batman_running;
+          // console.log("source",player.item(0).src, typeof(player.item(0).src));
+          // console.log("image",batman_running, typeof(batman_running));
+        }
         const rightInterval = setInterval(function () {
           if (currentRun === 2 || hCounter.current > 86) {
             clearInterval(rightInterval);
+            setTimeout(function () {
+              player.item(0).src = batman_stand;
+            }, 1000);
           } else {
             hCounter.current += 0.25;
             currentRun += 0.25;
@@ -28,13 +43,26 @@ export default function Player() {
           }
         }, 10);
       }
+
       // moving to the left
       if (event.keyCode === 65 && hCounter.current > 4) {
         let player = document.getElementsByClassName("player-sprite");
         let currentRun = 0;
+        // temporary
+        if (
+          player.item(0).src !==
+          "http://localhost:3000/static/media/batman-running-reverse.5c949a49ce460e75d0d2.gif"
+        ) {
+          player.item(0).src = batman_running_reverse;
+          // console.log("source",player.item(0).src, typeof(player.item(0).src));
+          // console.log("image",batman_running, typeof(batman_running));
+        }
         const leftInterval = setInterval(function () {
           if (currentRun === -2 || hCounter.current < 4) {
             clearInterval(leftInterval);
+            setTimeout(function () {
+              player.item(0).src = batman_stand_reverse;
+            }, 1000);
           } else {
             hCounter.current -= 0.25;
             currentRun -= 0.25;
@@ -78,7 +106,11 @@ export default function Player() {
 
   return (
     <div className="player-sprite-container">
-      <img src={batman_stand} className="player-sprite" alt="Batman Not Found"></img>
+      <img
+        src={batman_stand}
+        className="player-sprite"
+        alt="Batman Not Found"
+      ></img>
     </div>
   );
 }
