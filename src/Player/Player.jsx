@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import "./Player.css";
-import Spritesheet from "react-responsive-spritesheet";
-import batman_sheet from "../images/sprites/batman/batman.gif";
+import batman_stand from "../images/sprites/batman/batman-stand.gif";
 
 export default function Player() {
-  let hCounter = useRef(6);
-  let vCounter = useRef(20);
+  let hCounter = useRef(4);
+  let vCounter = useRef(10);
   let jumpPressed = useRef(false);
 
   useEffect(() => {});
@@ -15,11 +14,11 @@ export default function Player() {
     // This handles what is pressed and how to manage it
     const handleKeyDown = (event) => {
       // moving to the right
-      if (event.keyCode === 68 && hCounter.current < 84) {
+      if (event.keyCode === 68 && hCounter.current < 86) {
         let player = document.getElementsByClassName("player-sprite");
         let currentRun = 0;
         const rightInterval = setInterval(function () {
-          if (currentRun === 2 || hCounter.current > 84) {
+          if (currentRun === 2 || hCounter.current > 86) {
             clearInterval(rightInterval);
           } else {
             hCounter.current += 0.25;
@@ -30,11 +29,11 @@ export default function Player() {
         }, 10);
       }
       // moving to the left
-      if (event.keyCode === 65 && hCounter.current > 6) {
+      if (event.keyCode === 65 && hCounter.current > 4) {
         let player = document.getElementsByClassName("player-sprite");
         let currentRun = 0;
         const leftInterval = setInterval(function () {
-          if (currentRun === -2 || hCounter.current < 6) {
+          if (currentRun === -2 || hCounter.current < 4) {
             clearInterval(leftInterval);
           } else {
             hCounter.current -= 0.25;
@@ -51,21 +50,21 @@ export default function Player() {
         let player = document.getElementsByClassName("player-sprite");
         let vDirection = "up";
         const jumpInterval = setInterval(function () {
-          if (vDirection === "down" && vCounter.current === 20) {
+          if (vDirection === "down" && vCounter.current === 10) {
             clearInterval(jumpInterval);
             jumpPressed.current = false;
-          } else if (vDirection === "up" && vCounter.current === 60) {
+          } else if (vDirection === "up" && vCounter.current === 40) {
             vDirection = "down";
-          } else if (vDirection === "up" && vCounter.current !== 60) {
+          } else if (vDirection === "up" && vCounter.current !== 40) {
             vCounter.current += 1;
             let vMove = vCounter.current + "%";
             player.item(0).style.bottom = vMove;
-          } else if (vDirection === "down" && vCounter.current !== 20) {
+          } else if (vDirection === "down" && vCounter.current !== 10) {
             vCounter.current -= 1;
             let vMove = vCounter.current + "%";
             player.item(0).style.bottom = vMove;
           }
-        }, 10);
+        }, 12);
       }
     };
     // adds the keydown listener
@@ -79,18 +78,7 @@ export default function Player() {
 
   return (
     <div className="player-sprite-container">
-      <div className="player-sprite">
-        {/* Creates animation */}
-        <Spritesheet
-          image={batman_sheet}
-          widthFrame={40}
-          heightFrame={56}
-          steps={3}
-          fps={8}
-          loop={true}
-          isResponsive={true}
-        />
-      </div>
+      <img src={batman_stand} className="player-sprite" alt="Batman Not Found"></img>
     </div>
   );
 }

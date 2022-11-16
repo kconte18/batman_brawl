@@ -4,9 +4,9 @@
 }
 
 .player-sprite {
-    width: 8rem;
-    height: 8rem;
+    width: 12rem;
+    height: 12rem;
     position:absolute;
-    bottom: 20%;
-    left: 6%;
+    bottom: 10%;
+    left: 4%;
 }
