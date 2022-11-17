@@ -9,6 +9,7 @@ export default function Player() {
   let hCounter = useRef(4);
   let vCounter = useRef(10);
   let jumpPressed = useRef(false);
+  let idleTime = useRef(0);
 
   useEffect(() => {});
 
@@ -20,11 +21,7 @@ export default function Player() {
       if (event.keyCode === 68 && hCounter.current < 86) {
         let player = document.getElementsByClassName("player-sprite");
         let currentRun = 0;
-        // temporary
-        if (
-          player.item(0).src !==
-          "http://localhost:3000/static/media/batman-running.ebc0a728fae5bf2bb4a4.gif"
-        ) {
+        if (!player.item(0).src.includes(batman_running)) {
           player.item(0).src = batman_running;
           // console.log("source",player.item(0).src, typeof(player.item(0).src));
           // console.log("image",batman_running, typeof(batman_running));
@@ -32,9 +29,9 @@ export default function Player() {
         const rightInterval = setInterval(function () {
           if (currentRun === 2 || hCounter.current > 86) {
             clearInterval(rightInterval);
-            setTimeout(function () {
-              player.item(0).src = batman_stand;
-            }, 1000);
+            // setTimeout(function () {
+            //   player.item(0).src = batman_stand;
+            // }, 1000);
           } else {
             hCounter.current += 0.25;
             currentRun += 0.25;
@@ -48,11 +45,7 @@ export default function Player() {
       if (event.keyCode === 65 && hCounter.current > 4) {
         let player = document.getElementsByClassName("player-sprite");
         let currentRun = 0;
-        // temporary
-        if (
-          player.item(0).src !==
-          "http://localhost:3000/static/media/batman-running-reverse.5c949a49ce460e75d0d2.gif"
-        ) {
+        if (!player.item(0).src.includes(batman_running_reverse)) {
           player.item(0).src = batman_running_reverse;
           // console.log("source",player.item(0).src, typeof(player.item(0).src));
           // console.log("image",batman_running, typeof(batman_running));
@@ -60,9 +53,9 @@ export default function Player() {
         const leftInterval = setInterval(function () {
           if (currentRun === -2 || hCounter.current < 4) {
             clearInterval(leftInterval);
-            setTimeout(function () {
-              player.item(0).src = batman_stand_reverse;
-            }, 1000);
+            // setTimeout(function () {
+            //   player.item(0).src = batman_stand_reverse;
+            // }, 1000);
           } else {
             hCounter.current -= 0.25;
             currentRun -= 0.25;
